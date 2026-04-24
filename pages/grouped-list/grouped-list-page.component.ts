@@ -1,8 +1,6 @@
 import { Component, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { delay, interval, tap } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   NgVirtualListModule, NgVirtualListComponent, IVirtualListCollection, IVirtualListItemConfigMap, IRenderVirtualListItem, ISize, Id,
   IScrollingSettings,
@@ -256,65 +254,6 @@ export class GroupedListPageComponent {
   motionBlurEnabled = false;
 
   constructor() {
-    interval(1000).pipe(
-      takeUntilDestroyed(),
-      delay(250),
-      tap(() => {
-        const collection = [...this.dynamicItems];
-        collection.unshift(...generateDynamicItems(1, this.dynamicItems.length));
-        this.dynamicItems = collection;
-      }),
-      // delay(250),
-      // tap(() => {
-      //   const collection = [...this.dynamicItems];
-      //   collection.shift();
-      //   this.dynamicItems = collection;
-      // }),
-      delay(450),
-      tap(() => {
-        const collection = [...this.dynamicItems], len = collection.length, insertIndex = Math.floor(len * .5),
-          insertedItems = generateDynamicItems(1, this.dynamicItems.length);
-        collection.splice(insertIndex, 0, ...insertedItems);
-        this.dynamicItems = collection;
-      }),
-      delay(650),
-      tap(() => {
-        const collection = [...this.dynamicItems];
-        collection.push(...generateDynamicItems(1, this.dynamicItems.length));
-        this.dynamicItems = collection;
-      }),
-    ).subscribe();
-
-
-    interval(1000).pipe(
-      takeUntilDestroyed(),
-      delay(0),
-      tap(() => {
-        const collection = [...this.dynamicShortItems];
-        collection.unshift(...generateDynamicShortItems(1, this.dynamicShortItems.length));
-        this.dynamicShortItems = collection;
-      }),
-      // delay(250),
-      // tap(() => {
-      //   const collection = [...this.dynamicShortItems];
-      //   collection.shift();
-      //   this.dynamicShortItems = collection;
-      // }),
-      delay(450),
-      tap(() => {
-        const collection = [...this.dynamicShortItems], len = collection.length, insertIndex = Math.floor(len * .5),
-          insertedItems = generateDynamicShortItems(1, this.dynamicShortItems.length);
-        collection.splice(insertIndex, 0, ...insertedItems);
-        this.dynamicShortItems = collection;
-      }),
-      delay(650),
-      tap(() => {
-        const collection = [...this.dynamicShortItems];
-        collection.push(...generateDynamicShortItems(1, this.dynamicShortItems.length));
-        this.dynamicShortItems = collection;
-      }),
-    ).subscribe();
-
     const bp: Promise<EventTarget & { level: number, charging: boolean; }> | null = (navigator as any).getBattery?.() ?? null;
     if (!!bp) {
       bp.then(battery => {

@@ -5,7 +5,7 @@ import { CustomScrollBarTheme } from './interfaces/custom-scrollbar-theme';
 import { DEFAULT_SCROLLBAR_THEME } from './const';
 import { Color, GradientColor } from '../interfaces';
 import { SubstarateStyle, SubstarateStyles, XSubstrateComponent } from '../x-substrate';
-import { GradientColorPositions, NgScrollBarPublicService, ScrollbarStates } from '../../../../projects/ng-virtual-list/src/public-api';
+import { GradientColorPositions, NgScrollBarPublicService, ScrollbarStates } from 'ng-virtual-list';
 
 /**
  * ScrollBar component.
