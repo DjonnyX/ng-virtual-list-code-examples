@@ -1,0 +1,71 @@
+<div class="vl-section bt">
+  <a href="https://github.com/DjonnyX/ng-virtual-list-code-examples/tree/main/pages/list-gallery-with-transformation">code example</a>
+</div>
+
+<div class="vl-section">
+  <div class="vl-section__container">
+    <h2>Carousel Deck Of Cards 3D</h2>
+    <ng-virtual-list #gallery4 class="list list-gallery list-gallery-3d transpanent" [ngClass]="gallery4Classes" direction="horizontal"
+      [items]="horizontalItems" [bufferSize]="5" [maxBufferSize]="5"
+      methodForSelecting="select" [itemRenderer]="itemRendererGallery" [dynamicSize]="false" [itemSize]="120"
+      [scrollbarThumbRenderer]="customScrollBarThumb" [scrollbarThumbParams]="customScrollBarThumbParams"
+      (onItemClick)="onItemClick($event)" (onSelect)="onSelectHandler($event)" [selectedIds]="2" [selectByClick]="true"
+      [snapToItem]="true" snapToItemAlign="center" [itemTransform]="deckOfCards3D"
+      [scrollbarEnabled]="false" [scrollbarThickness]="6" (onScrollReachStart)="onScrollReachStartHandler()" 
+      (onScrollReachEnd)="onScrollReachEndHandler()"></ng-virtual-list>
+  </div>
+</div>
+
+<div class="vl-section">
+  <div class="vl-section__container">
+    <h2>Carousel Deck Of Cards</h2>
+    <ng-virtual-list #gallery2 class="list list-gallery transpanent" [ngClass]="gallery2Classes" direction="horizontal"
+      [items]="horizontalItems" [bufferSize]="5" [maxBufferSize]="5" [motionBlurEnabled]="motionBlurEnabled"
+      methodForSelecting="select" [itemRenderer]="itemRendererGallery" [dynamicSize]="false" [itemSize]="120"
+      [scrollbarThumbRenderer]="customScrollBarThumb" [scrollbarThumbParams]="customScrollBarThumbParams"
+      (onItemClick)="onItemClick($event)" (onSelect)="onSelectHandler($event)" [selectedIds]="2" [selectByClick]="true"
+      [snapToItem]="true" snapToItemAlign="center" [itemTransform]="deckOfCards"
+      [scrollbarEnabled]="false" [scrollbarThickness]="6" (onScrollReachStart)="onScrollReachStartHandler()" 
+      (onScrollReachEnd)="onScrollReachEndHandler()"></ng-virtual-list>
+  </div>
+</div>
+
+<div class="vl-section">
+  <div class="vl-section__container">
+    <h2>Event Horizon Carousel</h2>
+    <ng-virtual-list #gallery3 class="list list-gallery" [ngClass]="gallery3Classes" direction="horizontal"
+      [items]="horizontalItems" [bufferSize]="10" [maxBufferSize]="10" [motionBlurEnabled]="motionBlurEnabled"
+      methodForSelecting="select" [itemRenderer]="itemRendererGallery" [dynamicSize]="false" [itemSize]="120"
+      [scrollbarThumbRenderer]="customScrollBarThumb" [scrollbarThumbParams]="customScrollBarThumbParams"
+      (onItemClick)="onItemClick($event)" (onSelect)="onSelectHandler($event)" [selectedIds]="2" [selectByClick]="true"
+      [snapToItem]="true" snapToItemAlign="center" [itemTransform]="eventHorizon"
+      [scrollbarEnabled]="false" [scrollbarThickness]="6" (onScrollReachStart)="onScrollReachStartHandler()" 
+      (onScrollReachEnd)="onScrollReachEndHandler()"></ng-virtual-list>
+  </div>
+</div>
+
+<div class="vl-section">
+  <div class="vl-section__container">
+    <h2>Linear Carousel</h2>
+    <ng-virtual-list #gallery1 class="list list-gallery" [ngClass]="gallery1Classes" direction="horizontal"
+      [items]="horizontalItems" [bufferSize]="5" [maxBufferSize]="5" [motionBlurEnabled]="motionBlurEnabled"
+      methodForSelecting="select" [itemRenderer]="itemRendererGallery" [dynamicSize]="false" [itemSize]="120"
+      [scrollbarThumbRenderer]="customScrollBarThumb" [scrollbarThumbParams]="customScrollBarThumbParams"
+      (onItemClick)="onItemClick($event)" (onSelect)="onSelectHandler($event)" [selectedIds]="2" [selectByClick]="true"
+      [snapToItem]="true" snapToItemAlign="center" [itemTransform]="linear"
+      [scrollbarEnabled]="false" [scrollbarThickness]="6" (onScrollReachStart)="onScrollReachStartHandler()" 
+      (onScrollReachEnd)="onScrollReachEndHandler()"></ng-virtual-list>
+  </div>
+</div>
+
+<ng-template #itemRendererGallery let-data="data" let-config="config">
+  @if (data) {
+    <div [ngClass]="{'list-gallery__container': true, 'even': config.even, 'selected': config.selected}">
+      <span>{{data.name}}</span>
+    </div>
+  }
+</ng-template>
+
+<ng-template #customScrollBarThumb let-api="api" let-width="width" let-height="height" let-fillPositions="fillPositions" let-params="params">
+  <custom-scrollbar [api]="api" [width]="width" [height]="height" [fillPositions]="fillPositions" [params]="params"></custom-scrollbar>
+</ng-template>
