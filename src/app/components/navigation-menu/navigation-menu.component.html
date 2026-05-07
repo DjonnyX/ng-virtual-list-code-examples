@@ -1,0 +1,19 @@
+@let items = collection();
+@let configMap = itemConfigMap();
+@let initialSelectedId = selectedId();
+<div class="wrapper" clickOutside (onClickOutside)="onClickOutside($event)">
+    <div class="list-wrapper">
+        <ng-virtual-list #list class="list" [items]="items" [itemConfigMap]="configMap" [itemRenderer]="itemRenderer" [itemSize]="43"
+            selectingMode="select" [selectByClick]="false" [bufferSize]="1" [maxBufferSize]="1" [scrollbarThickness]="2"
+            [selectedIds]="initialSelectedId" [scrollStartOffset]="scrollStartOffset()"></ng-virtual-list>
+    </div>
+    <ng-template #itemRenderer let-data="data" let-config="config" let-api="api">
+        <x-nav-item [api]="api" [data]="data" [config]="config" (select)="onItemClickHandler(data)" (staticClick)="onItemClickHandler(data)"></x-nav-item>
+    </ng-template>
+
+    <ng-template #customScrollBarThumb let-api="api" let-width="width" let-height="height"
+        let-fillPositions="fillPositions" let-params="params">
+        <custom-scrollbar [api]="api" [width]="width" [height]="height" [fillPositions]="fillPositions"
+            [params]="params"></custom-scrollbar>
+    </ng-template>
+</div>

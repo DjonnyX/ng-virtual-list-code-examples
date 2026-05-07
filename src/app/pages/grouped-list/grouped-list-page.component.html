@@ -1,0 +1,82 @@
+<div class="vl-section bt">
+  <a href="https://github.com/DjonnyX/ng-virtual-list-code-examples/tree/main/pages/grouped-list">code example</a>
+</div>
+
+<div class="vl-section">
+  <div class="vl-section__container">
+    <h2>Horizontal list with pinned groups and multiple selection options</h2>
+    <ng-virtual-list class="list" langTextDir="rtl" direction="horizontal" [items]="horizontalGroupItems" [bufferSize]="1" [maxBufferSize]="5"
+      selectingMode="multi-select" [itemRenderer]="horizontalGroupItemRenderer" [motionBlurEnabled]="motionBlurEnabled"
+      [itemConfigMap]="horizontalGroupItemsStickyMap" [dynamicSize]="false" [itemSize]="54" [stickyEnabled]="true" [snapScrollToEnd]="false"
+      (onItemClick)="onItemClick($event)" (onSelect)="onSelectHandler($event)" [selectedIds]="[3,2]"
+      (onScrollReachStart)="onScrollReachStartHandler()" (onScrollReachEnd)="onScrollReachEndHandler()"></ng-virtual-list>
+  </div>
+</div>
+
+<ng-template #horizontalGroupItemRenderer let-data="data" let-config="config">
+  @if (data) {
+    @switch (data.type) {
+      @case ("group-header") {
+        <div [ngClass]="{'list__h-group-container': true, 'even': config.even, 'selected': config.selected}">
+          <span>{{data.name}}</span>
+        </div>
+      }
+      @default {
+        <div [ngClass]="{'list__h-container': true, 'even': config.even, 'selected': config.selected}">
+          <span>{{data.name}}</span>
+        </div>
+      }
+    }
+  }
+</ng-template>
+
+<div class="vl-section">
+  <div class="vl-section__container">
+    <h2>List with groups</h2>
+    <ng-virtual-list class="list" [items]="groupItems" [itemRenderer]="groupItemRenderer" [bufferSize]="1" [maxBufferSize]="5" 
+      [scrollbarThumbRenderer]="customScrollBarThumb" [scrollbarThumbParams]="customScrollBarThumbParams" [scrollbarThickness]="6"
+      [itemConfigMap]="groupItemsStickyMap" [dynamicSize]="false" [itemSize]="40" (onItemClick)="onItemClick($event)" (onScrollReachStart)="onScrollReachStartHandler()"
+      [motionBlurEnabled]="motionBlurEnabled" (onScrollReachEnd)="onScrollReachEndHandler()"></ng-virtual-list>
+  </div>
+</div>
+
+<div class="vl-section">
+  <div class="vl-section__container">
+    <h2>List with sticky groups</h2>
+    <ng-virtual-list class="list" langTextDir="rtl" [items]="groupItems" [itemRenderer]="groupItemRenderer" [bufferSize]="2" [maxBufferSize]="2"
+      [itemConfigMap]="groupItemsStickyMap"  [dynamicSize]="false" [itemSize]="40" [stickyEnabled]="true" (onItemClick)="onItemClick($event)"
+      [scrollbarThumbRenderer]="customScrollBarThumb" [scrollbarThumbParams]="customScrollBarThumbParams" [scrollbarThickness]="6"
+      [motionBlurEnabled]="motionBlurEnabled" (onScrollReachStart)="onScrollReachStartHandler()" (onScrollReachEnd)="onScrollReachEndHandler()">
+    </ng-virtual-list>
+  </div>
+</div>
+
+<ng-template #itemRenderer let-data="data" let-config="config">
+  @if (data) {
+    <div [ngClass]="{'list__container': true, 'even': config.even, 'selected': config.selected}">
+      <span>{{data.name}}</span>
+    </div>
+  }
+</ng-template>
+
+<ng-template #groupItemRenderer let-data="data" let-config="config">
+  @if (data) {
+    @switch (data.type) {
+      @case ("group-header") {
+        <div [ngClass]="{'list__group-container': true, 'even': config.even, 'selected': config.selected}">
+          <span>{{data.name}}</span>
+        </div>
+      }
+      @default {
+        <div [ngClass]="{'list__container': true, 'even': config.even, 'selected': config.selected}">
+          <span>{{data.name}}</span>
+        </div>
+      }
+    }
+  }
+</ng-template>
+
+<ng-template #customScrollBarThumb let-api="api" let-width="width" let-height="height" let-fillPositions="fillPositions" let-params="params">
+  <custom-scrollbar [api]="api" [width]="width" [height]="height" [fillPositions]="fillPositions" [params]="params"></custom-scrollbar>
+</ng-template>
+

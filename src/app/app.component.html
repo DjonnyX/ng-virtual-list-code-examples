@@ -1,0 +1,72 @@
+@let pageTitle = title.getTitle();
+@let enabledDockLeft = dockLeftCollapsible();
+<div class="wrapper">
+    <div class="container">
+        <img class="bg-flare" src="bg-flare.png">
+        <div #toolbar localeSensitive class="toolbar" [ngClass]="{'enabled-dock-left': enabledDockLeft}">
+            <div>
+                @if (enabledDockLeft) {
+                    <x-menu-button name="menu-button" (onClick)="onOpenMenuHandler($event)" [opened]="menuOpened()" />
+                }
+            </div>
+            <div #header class="title">
+                <div class="section block cap" style="margin: 0;">
+                    <div class="wr">
+                        <h1 class="center lim" style="margin: 0;">ng-virtual-list</h1>
+                    </div>
+                    <p class="head__title">{{pageTitle??''}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-container">
+            @let doc = dockMode();
+            <x-drawer [dock]="doc" [dockLeftSize]="menuSize()" [dockLeftCollapsible]="enabledDockLeft">
+                <dock-left>
+                    <x-navigation-menu [scrollStartOffset]="toolbarBounds().height" (close)="onGroupsCloseHandler()" />
+                </dock-left>
+
+
+                <div class="viewer-container">
+                    <ng-virtual-list #list class="list" [items]="items" [bufferSize]="1" [maxBufferSize]="1"
+                        [itemRenderer]="itemRenderer" [dynamicSize]="true" [scrollStartOffset]="72"
+                        [motionBlurEnabled]="motionBlurEnabled()" [scrollbarThickness]="2"></ng-virtual-list>
+                </div>
+
+                <ng-template #itemRenderer let-data="data" let-config="config">
+                    @if (data) {
+                        @switch (data.type) {
+                            @case ("logo") {
+                                <div class="page-wrapper">
+                                    <div class="section vl-section block cap">
+                                        <img class="logo" [src]="logo" />
+                                        <div class="version"><span>v 20.12.0</span></div>
+                                    </div>
+                                </div>
+                            }
+                            @case ("footer") {
+                                <div class="page-wrapper">
+                                    <div class="section vl-section block cap">
+                                        <p class="l m" style="margin-bottom: 0;">&#64;author: Evgenii Grebennikov</p>
+                                        <p class="l m m0">djonnyx&#64;gmail.com</p>
+                                        <p class="l s">2026</p>
+                                    </div>
+                                </div>
+                            }
+                            @default {
+                                <router-outlet></router-outlet>
+                            }
+                        }
+                    }
+                </ng-template>
+
+                <ng-template #customScrollBarThumb let-api="api" let-width="width" let-height="height"
+                    let-fillPositions="fillPositions" let-params="params">
+                    <custom-scrollbar [api]="api" [width]="width" [height]="height" [fillPositions]="fillPositions"
+                        [params]="params"></custom-scrollbar>
+                </ng-template>
+
+            </x-drawer>
+        </div>
+    </div>
+</div>

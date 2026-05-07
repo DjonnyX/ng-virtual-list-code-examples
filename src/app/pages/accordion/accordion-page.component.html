@@ -1,0 +1,45 @@
+<div class="vl-section bt">
+  <a href="https://github.com/DjonnyX/ng-virtual-list-code-examples/tree/main/pages/dynamic-list">code example</a>
+</div>
+
+<div class="vl-section">
+  <div class="vl-section__container">
+    <h2>List with dynamic content elements</h2>
+    <ng-virtual-list #dynamicList class="list" [items]="groupDynamicItemsWithSnap" [itemRenderer]="groupItemRenderer"
+      [bufferSize]="3" [maxBufferSize]="3" [itemConfigMap]="groupDynamicItemsStickyMapWithSnap" [stickyEnabled]="true" collapsingMode="accordion"
+      [scrollbarThumbRenderer]="customScrollBarThumb" [scrollbarThumbParams]="customScrollBarThumbParams" [collapsedIds]="collapsedIds()"
+      [scrollbarThickness]="6" [scrollingSettings]="scrollingSettings" (onViewportChange)="onViewportChangeHandler($event)"
+      (onItemClick)="onItemClick($event)" (onScrollReachStart)="onScrollReachStartHandler()" (onCollapse)="onCollapseHandler($event)"
+      [motionBlurEnabled]="motionBlurEnabled" (onScrollReachEnd)="onScrollReachEndHandler()"></ng-virtual-list>
+  </div>
+</div>
+
+<ng-template #itemRenderer let-data="data" let-config="config">
+  @if (data) {
+    <div [ngClass]="{'list__container': true, 'even': config.even, 'selected': config.selected}">
+      <span>{{data.name}}</span>
+    </div>
+  }
+</ng-template>
+
+<ng-template #groupItemRenderer let-data="data" let-config="config">
+  @if (data) {
+    @switch (data.type) {
+      @case ("group-header") {
+        <div [ngClass]="{'list__group-container': true, 'even': config.even, 'selected': config.selected}">
+          <span>{{data.name}}</span>
+        </div>
+      }
+      @default {
+        <div [ngClass]="{'list__container': true, 'even': config.even, 'selected': config.selected}">
+          <span>{{data.name}}</span>
+        </div>
+      }
+    }
+  }
+</ng-template>
+
+<ng-template #customScrollBarThumb let-api="api" let-width="width" let-height="height" let-fillPositions="fillPositions" let-params="params">
+  <custom-scrollbar [api]="api" [width]="width" [height]="height" [fillPositions]="fillPositions" [params]="params"></custom-scrollbar>
+  </ng-template>
+
