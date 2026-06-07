@@ -40,50 +40,10 @@ for (let i = 0, l = MAX_ITEMS; i < l; i++) {
   ITEMS.push({ id, name: `Item: ${id}` });
 }
 
-const ITEMS_RTL: IVirtualListCollection<ICollectionItem> = [];
-for (let i = 0, l = MAX_ITEMS; i < l; i++) {
-  const id = i + 1;
-  ITEMS_RTL.push({ id, name: `פָּרִיט: ${id}` });
-}
-
 const HORIZONTAL_ITEMS: IVirtualListCollection<ICollectionItem> = [];
 for (let i = 0, l = MAX_ITEMS; i < l; i++) {
   const id = i + 1;
   HORIZONTAL_ITEMS.push({ id, name: `${id}` });
-}
-
-const GROUP_NAMES = ['A', 'B', 'C', 'D', 'E'];
-
-const getGroupName = () => {
-  return GROUP_NAMES[Math.floor(Math.random() * GROUP_NAMES.length)];
-};
-
-const HORIZONTAL_GROUP_ITEMS: IVirtualListCollection<IGroupCollectionItem> = [],
-  HORIZONTAL_GROUP_ITEMS_ITEM_CONFIG_MAP: IVirtualListItemConfigMap = {};
-
-for (let i = 0, l = MAX_ITEMS; i < l; i++) {
-  const id = i + 1, type = i === 0 || Math.random() > .895 ? 'group-header' : 'item';
-  HORIZONTAL_GROUP_ITEMS.push({ id, type, name: type === 'group-header' ? getGroupName() : `${id}` });
-  HORIZONTAL_GROUP_ITEMS_ITEM_CONFIG_MAP[id] = {
-    sticky: type === 'group-header' ? Math.round(Math.random() * 2) === 1 ? 1 : 2 : 0,
-    selectable: type !== 'group-header',
-  }
-}
-
-const GROUP_ITEMS: IVirtualListCollection<IGroupCollectionItem> = [],
-  GROUP_ITEMS_ITEM_CONFIG_MAP: IVirtualListItemConfigMap = {};
-
-let groupIndex = 0;
-for (let i = 0, l = MAX_ITEMS; i < l; i++) {
-  const id = i + 1, type = i === 0 || Math.random() > .895 ? 'group-header' : 'item';
-  if (type === 'group-header') {
-    groupIndex++;
-  }
-  GROUP_ITEMS.push({ id, type, name: type === 'group-header' ? `Group ${groupIndex}` : `Item: ${id}` });
-  GROUP_ITEMS_ITEM_CONFIG_MAP[id] = {
-    sticky: type === 'group-header' ? 1 : 0,
-    selectable: type !== 'group-header',
-  };
 }
 
 const CHARS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -114,30 +74,24 @@ const generateText = (len: number = 10) => {
   return `${result.join(' ')}.`;
 };
 
-const GROUP_DYNAMIC_ITEMS: IVirtualListCollection<IGroupCollectionItem> = [],
-  GROUP_DYNAMIC_ITEMS_ITEM_CONFIG_MAP: IVirtualListItemConfigMap = {},
-  GROUP_DYNAMIC_ITEMS_WITH_SNAP: IVirtualListCollection<IGroupCollectionItem> = [],
+const GROUP_DYNAMIC_ITEMS_WITH_SNAP: IVirtualListCollection<IGroupCollectionItem> = [],
   GROUP_DYNAMIC_ITEMS_ITEM_CONFIG_MAP_WITH_SNAP: IVirtualListItemConfigMap = {};
 
 let groupDynamicIndex = 0;
 for (let i = 0, l = MAX_ITEMS; i < l; i++) {
   const id = i + 1, type = i === 0 || Math.random() > .895 ? 'group-header' : 'item',
     isGroup = type === 'group-header',
+    fullSize = Math.round(Math.pow(Math.random(), 4)) === 1,
     sticky = 1;
   if (isGroup) {
     groupDynamicIndex++;
   }
-  GROUP_DYNAMIC_ITEMS.push({ id, type, name: isGroup ? `Group ${id}. ${generateText()}` : `${id}. ${generateText()}` });
-  GROUP_DYNAMIC_ITEMS_ITEM_CONFIG_MAP[id] = {
-    sticky: isGroup ? sticky : 0,
-    selectable: !isGroup,
-    collapsable: isGroup,
-  };
   GROUP_DYNAMIC_ITEMS_WITH_SNAP.push({ id, type, name: isGroup ? `Group ${id}` : `${id}. ${generateText()}` });
   GROUP_DYNAMIC_ITEMS_ITEM_CONFIG_MAP_WITH_SNAP[id] = {
     sticky: isGroup ? sticky : 0,
     selectable: !isGroup,
     collapsable: isGroup,
+    fullSize,
   };
 }
 
@@ -155,15 +109,6 @@ const generateDynamicItems = (len: number, startWith: number = 0) => {
   for (let i = 0, l = len; i < l; i++) {
     const id = startWith + i;
     result.push({ id, name: `${id} ${generateText(8)}` });
-  }
-  return result;
-};
-
-const generateDynamicShortItems = (len: number, startWith: number = 0) => {
-  const result: IVirtualListCollection<ICollectionItem> = [];
-  for (let i = 0, l = len; i < l; i++) {
-    const id = startWith + i;
-    result.push({ id, name: `${id} ${generateWord(12)}` });
   }
   return result;
 };
@@ -203,25 +148,10 @@ export class SplitListPageComponent {
 
   items2 = generateDynamicItems(1000, 0);
 
-  dynamicItems = generateDynamicItems(20, 0);
-
-  dynamicShortItems = generateDynamicShortItems(20, 0);
-
-  itemsRtl = ITEMS_RTL;
-
   horizontalItems = HORIZONTAL_ITEMS;
-
-  groupItems = GROUP_ITEMS;
-  groupItemsStickyMap = GROUP_ITEMS_ITEM_CONFIG_MAP;
-
-  groupDynamicItems = GROUP_DYNAMIC_ITEMS;
-  groupDynamicItemsStickyMap = GROUP_DYNAMIC_ITEMS_ITEM_CONFIG_MAP;
 
   groupDynamicItemsWithSnap = GROUP_DYNAMIC_ITEMS_WITH_SNAP;
   groupDynamicItemsStickyMapWithSnap = GROUP_DYNAMIC_ITEMS_ITEM_CONFIG_MAP_WITH_SNAP;
-
-  horizontalGroupItems = HORIZONTAL_GROUP_ITEMS;
-  horizontalGroupItemsStickyMap = HORIZONTAL_GROUP_ITEMS_ITEM_CONFIG_MAP;
 
   private _minId: Id = this.items.length > 0 ? this.items[0].id : 0;
   get minId() { return this._minId; };
@@ -230,14 +160,6 @@ export class SplitListPageComponent {
   get maxId() { return this._maxId; };
 
   itemId: Id = this._minId;
-
-  private _minDlId: Id = this.groupDynamicItems.length > 0 ? this.groupDynamicItems[0].id : 0;
-  get minDlId() { return this._minDlId; };
-
-  private _maxDlId: Id = this.groupDynamicItems.length > 0 ? this.groupDynamicItems[this.groupDynamicItems.length - 1].id : 0;
-  get maxDlId() { return this._maxDlId; };
-
-  dlItemId: Id = this._minDlId;
 
   private _minDl2Id: Id = this.items2.length > 0 ? this.items2[0].id : 0;
   get minDl2Id() { return this._minDl2Id; };
@@ -311,18 +233,6 @@ export class SplitListPageComponent {
     }
   }
 
-  onButtonScrollDLToIdClickHandler = (e: Event) => {
-    const list = this._dynamicListContainerRef(), id = this.dlItemId;
-    if (list && id !== null) {
-      list.scrollTo(id, () => {
-        list.focus(id);
-        console.info(`scrollTo finished. id: ${id}`);
-      }, {
-        behavior: 'instant',
-      });
-    }
-  }
-
   onItemClick(item: IRenderVirtualListItem<ICollectionItem> | null) {
     if (item) {
       console.info(`Click: (ID: ${item.id}) Item ${item.data.name}`);
@@ -332,16 +242,6 @@ export class SplitListPageComponent {
   onButtonChangeItemsLengthHandler() {
     const len = this.itemsLength;
     this.items1 = generateItems(len);
-  }
-
-  onButtonChangeDynamicItemsLengthHandler() {
-    const len = this.dynamicItemsLength;
-    this.dynamicItems = generateDynamicItems(len);
-  }
-
-  onButtonChangeDynamicShortItemsLengthHandler() {
-    const len = this.dynamicShortItemsLength;
-    this.dynamicShortItems = generateDynamicShortItems(len);
   }
 
   onSelectHandler(data: Array<Id> | Id | null) {

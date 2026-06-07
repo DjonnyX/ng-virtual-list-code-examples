@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, effect, ElementRef, inject, input, output, Signal, signal, viewChild } from '@angular/core';
-import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { catchError, filter, of, switchMap, tap, throwError } from 'rxjs';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { filter, tap } from 'rxjs';
 import { NgVirtualListModule, NgVirtualListComponent, Id, IVirtualListCollection, IVirtualListItem, IVirtualListItemConfigMap } from 'ng-virtual-list';
-import { validateCollection } from './utils/validate-collection';
 import { ClickOutsideDirective, StaticClickDirective } from '../../directives';
 import { ITheme, ThemeService } from '../../theming';
 import { XNavItemComponent } from './nav-item/nav-item.component';
@@ -41,55 +40,79 @@ export class XNavigationMenuComponent {
 
   collection = signal<IVirtualListCollection<any>>([
     {
-      id: 1,
+      id: 10,
       name: 'Examples',
       type: 'group',
       route: '/simple-list/',
     },
     {
-      id: 2,
+      id: 11,
       name: 'Simple list',
       type: 'item',
       route: '/simple-list',
     },
     {
-      id: 3,
+      id: 12,
       name: 'Grouped list',
       type: 'item',
       route: '/grouped-list',
     },
     {
-      id: 4,
+      id: 13,
       name: 'Dynamic list',
       type: 'item',
       route: '/dynamic-list',
     },
     {
-      id: 5,
+      id: 14,
       name: 'Accordion',
       type: 'item',
       route: '/accordion',
     },
     {
-      id: 6,
+      id: 15,
       name: 'Split list',
       type: 'item',
       route: '/split-list',
     },
     {
-      id: 7,
+      id: 16,
       name: 'Swipe list',
       type: 'item',
       route: '/swipe-list',
     },
     {
-      id: 8,
+      id: 17,
       name: 'Carousel list',
       type: 'item',
       route: '/carousel-list',
     },
     {
-      id: 9,
+      id: 18,
+      name: 'Infinite list',
+      type: 'item',
+      route: '/infinite-list',
+    },
+    {
+      id: 46,
+      name: 'Color Picker Demo',
+      type: 'item',
+      route: '/color-picker-demo',
+    },
+    {
+      id: 47,
+      name: 'Time Picker Demo',
+      type: 'item',
+      route: '/time-picker-demo',
+    },
+    {
+      id: 48,
+      name: 'Desktop Demo',
+      type: 'item',
+      route: '/desktop-demo',
+    },
+    {
+      id: 100,
       name: 'Contacts',
       type: 'group',
       route: '/contacts',
@@ -101,9 +124,7 @@ export class XNavigationMenuComponent {
       selectable: true,
     },
     [2]: {
-      sticky: 1,
-      selectable: false,
-      collapsable: false,
+      selectable: true,
     },
     [3]: {
       selectable: true,
@@ -111,19 +132,65 @@ export class XNavigationMenuComponent {
     [4]: {
       selectable: true,
     },
-    [5]: {
+    [10]: {
+      sticky: 1,
+      selectable: false,
+      collapsable: false,
+    },
+    [11]: {
       selectable: true,
     },
-    [6]: {
+    [12]: {
       selectable: true,
     },
-    [7]: {
+    [13]: {
       selectable: true,
     },
-    [8]: {
+    [14]: {
       selectable: true,
     },
-    [9]: {
+    [15]: {
+      selectable: true,
+    },
+    [16]: {
+      selectable: true,
+    },
+    [17]: {
+      selectable: true,
+    },
+    [18]: {
+      selectable: true,
+    },
+    [40]: {
+      sticky: 1,
+      selectable: false,
+      collapsable: false,
+    },
+    [46]: {
+      selectable: true,
+    },
+    [47]: {
+      selectable: true,
+    },
+    [48]: {
+      selectable: true,
+    },
+    [49]: {
+      selectable: true,
+    },
+    [50]: {
+      selectable: true,
+    },
+    [51]: {
+      selectable: true,
+    },
+    [52]: {
+      selectable: true,
+    },
+    [53]: {
+      selectable: true,
+    },
+    [100]: {
       sticky: 1,
       selectable: true,
       collapsable: false,

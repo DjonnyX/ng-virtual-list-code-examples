@@ -3,8 +3,6 @@ import {
   Component, computed, CUSTOM_ELEMENTS_SCHEMA, DestroyRef, effect, ElementRef, inject, OnDestroy, Signal,
   signal, viewChild, ViewEncapsulation,
 } from '@angular/core';
-import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, filter, fromEvent, map, tap, } from 'rxjs';
@@ -16,6 +14,8 @@ import { IMediaParams, MediaService } from './directives/media';
 import { ThemeNames, ThemeService } from './theming';
 import { XNavigationMenuComponent } from './components/navigation-menu/navigation-menu.component';
 import { LOGO } from './const';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { GradientColor, RoundedCorner } from './types';
 import { CustomScrollBarTheme } from './components/custom-scrollbar/interfaces/custom-scrollbar-theme';
 

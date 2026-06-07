@@ -40,33 +40,9 @@ a {
     margin-bottom: 24px;
     width: calc(100% - 40px);
     max-width: 640px;
-    color: #8280af;
-
-    .expression {
-        border-radius: 4px;
-        padding: 0px 4px;
-        background-color: rgba(255, 255, 255, .1);
-    }
 
     &.bt {
         margin-bottom: 6px;
-    }
-
-    .code {
-        position: relative;
-        background-color: #443b53;
-        border-radius: 5px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        padding: 0 16px 12px 16px;
-        color: #b1b3b5;
-        font-family: monospace;
-        margin-bottom: 12px;
-
-        .head {
-            padding: 8px 0;
-            color: #897b9f;
-            text-transform: uppercase;
-        }
     }
 
     &.cap {
@@ -103,14 +79,6 @@ a {
             margin-bottom: 10px;
             letter-spacing: 0.5px;
             font-weight: 800;
-        }
-
-        &>p {
-            color: #8280af;
-            font-size: 16px;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
-            font-weight: 500;
         }
 
         margin-bottom: 18px;
@@ -211,84 +179,71 @@ a {
     }
 }
 
-.list-divided {
-    &::part(item-odd item-row-odd) {
-        background-color: #494058;
-    }
+.time-string {
+    margin: auto;
+    color: #605485;
+    letter-spacing: 2px;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0;
+    text-align: center;
+    margin-bottom: 10px;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: initial;
+}
 
-    &::part(item-odd item-row-even) {
-        background-color: #443b53;
-    }
-
-    &::part(item-even item-row-odd) {
-        background-color: #443b53;
-    }
-
-    &::part(item-even item-row-even) {
-        background-color: #494058;
-    }
-
-    &::part(item-selected) {
-        background-color: #8129a3;
-    }
+.time {
+    max-width: 400px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4px;
 }
 
 .list {
     border-radius: 3px;
-    background-color: #0f0f11;
 
-    &::part(item-fx-focused) {
-        outline: none;
-        border: 2px solid #a9a9ff;
+    &::part(item-selected) {
+        box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.25);
     }
 
     &::part(viewport) {
         color: #e1dceb;
-        background-color: #443b53;
+    }
+
+    &.horizontal {
+        &::part(viewport) {
+            background: -webkit-linear-gradient(0deg, rgb(78 71 97) 0%, rgb(108 99 133) 50%, rgb(78 71 97) 100%);
+        }
+    }
+
+    &.vertical {
+        &::part(viewport) {
+            background: -webkit-linear-gradient(90deg, rgb(78 71 97) 0%, rgb(108 99 133) 50%, rgb(78 71 97) 100%);
+        }
     }
 
     &__container {
         cursor: pointer;
         user-select: none;
         word-break: break-all;
-        height: 100%;
+        height: 70px;
         width: 100%;
         padding: 6px 12px;
         box-sizing: border-box;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #e1dceb;
 
         &:hover {
-            background-color: #ffffff2d;
+            background-color: #40374e49;
         }
 
-        &.fullsize {
-            background-color: #3c4d86;
+        &.selected {
+            background-color: #8129a3;
         }
-
-        &>* {
-            height: auto;
-        }
-    }
-
-    &__group-container {
-        cursor: pointer;
-        user-select: none;
-        word-break: break-all;
-        height: 100%;
-        width: 100%;
-        padding: 6px 12px;
-        background-color: #605473;
-        color: #d3d3e2;
-        box-sizing: border-box;
-        font-weight: 600;
-        font-size: 12px;
-        text-transform: uppercase;
-        display: flex;
-        align-items: center;
-        color: #e1dceb;
 
         &>* {
             height: auto;
@@ -297,13 +252,7 @@ a {
 
     &.vertical {
         max-height: unset;
-        height: 400px;
-        width: 100%;
-    }
-
-    &.horizontal {
-        max-width: unset;
-        height: 60px;
+        height: 300px;
         width: 100%;
     }
 }

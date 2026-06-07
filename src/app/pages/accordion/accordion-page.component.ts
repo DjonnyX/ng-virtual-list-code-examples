@@ -83,15 +83,6 @@ for (let i = 0, l = MAX_ITEMS; i < l; i++) {
   };
 }
 
-const generateDynamicItems = (len: number, startWith: number = 0) => {
-  const result: IVirtualListCollection<ICollectionItem> = [];
-  for (let i = 0, l = len; i < l; i++) {
-    const id = startWith + i;
-    result.push({ id, name: `${id} ${generateText(8)}` });
-  }
-  return result;
-};
-
 @Component({
   selector: 'accordion-page',
   imports: [CommonModule, FormsModule, NgVirtualListModule, CustomScrollbarModule],
@@ -99,8 +90,7 @@ const generateDynamicItems = (len: number, startWith: number = 0) => {
   styleUrl: './accordion-page.component.scss'
 })
 export class AccordionPageComponent {
-
-  scrollingSettings: IScrollingSettings = {
+  readonly scrollingSettings: IScrollingSettings = {
     frictionalForce: 0.05,
     mass: 0.005,
     maxDistance: 100000,
@@ -109,22 +99,12 @@ export class AccordionPageComponent {
     optimization: false,
   }
 
-  protected _listContainerRef = viewChild('virtualList', { read: NgVirtualListComponent });
-
-  protected _dynamicItemsListContainerRef = viewChild('dynamicItemsList', { read: NgVirtualListComponent });
-
-  protected _dl2ListContainerRef = viewChild('dl2List', { read: NgVirtualListComponent });
-
   protected _dynamicListContainerRef = viewChild('dynamicList', { read: NgVirtualListComponent });
 
   customScrollBarThumbParams = CUSTOM_SCROLLBAR_THEME;
 
-  dynamicItems = generateDynamicItems(20, 0);
-
   groupDynamicItemsWithSnap = GROUP_DYNAMIC_ITEMS_WITH_SNAP;
   groupDynamicItemsStickyMapWithSnap = GROUP_DYNAMIC_ITEMS_ITEM_CONFIG_MAP_WITH_SNAP;
-
-  dynamicShortItemsLength: number = 0;
 
   motionBlurEnabled = false;
 
@@ -142,33 +122,6 @@ export class AccordionPageComponent {
         this.motionBlurEnabled = battery.level >= 0.10 || battery.charging;
       });
     }
-  }
-
-  onCollapseHandler(data: Array<Id> | Id | null) {
-    // if (data === null) {
-    //   return;
-    // }
-    // const ids = [data].flat(), result: Array<Id> = [];
-    // if (ids !== null) {
-    //   const currentIds = this.collapsedIds();
-    //   for (let i = 0, l = currentIds.length; i < l; i++) {
-    //     const id = currentIds[i];
-    //     if (ids.indexOf(id) > -1) {
-    //       continue;
-    //     }
-    //     this.collapsedId = id;
-    //     break;
-    //   }
-    //   for (let i = 0, l = GROUP_DYNAMIC_ITEMS_ITEM_COLLAPSED_IDS.length; i < l; i++) {
-    //     const id = GROUP_DYNAMIC_ITEMS_ITEM_COLLAPSED_IDS[i];
-    //     if (id !== this.collapsedId) {
-    //       result.push(id);
-    //     }
-    //   }
-    // }
-    // if (JSON.stringify(this.collapsedIds()) !== JSON.stringify(result)) {
-    //   this.collapsedIds.set(result);
-    // }
   }
 
   onItemClick(item: IRenderVirtualListItem<ICollectionItem> | null) {

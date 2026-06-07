@@ -1,6 +1,6 @@
 import { DestroyRef, Directive, effect, ElementRef, inject, input, output } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { IDisplayObjectMeasures } from '../../../projects/ng-virtual-list/src/public-api';
+import { IDisplayObjectMeasures } from 'ng-virtual-list';
 import { GradientColorPositions } from '../types';
 import { delay, tap } from 'rxjs';
 

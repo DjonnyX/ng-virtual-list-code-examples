@@ -1,0 +1,105 @@
+// reset
+button,
+input {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: normal;
+    background: none;
+    line-height: 1;
+
+    /* Browsers have different default form fonts */
+    font-size: 13px;
+    font-family: Arial;
+}
+
+a {
+    color: #55b0ff;
+}
+
+.b {
+    margin-bottom: 8px;
+}
+
+:host {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vl-section {
+    padding: 0 20px;
+    margin-bottom: 24px;
+    width: calc(100% - 40px);
+    max-width: 640px;
+
+    &.bt {
+        margin-bottom: 6px;
+    }
+}
+
+// reset ng-virtual-list-item styles
+.list::part(item) {
+    background-color: unset;
+}
+
+.desktop {
+    padding: 0 20px;
+    margin-bottom: 24px;
+    width: calc(100% - 40px);
+    max-width: 640px;
+
+    &__container {
+        position: relative;
+        width: 100%;
+        margin-bottom: 18px;
+    }
+}
+
+.pagginator-container {
+    position: absolute;
+    pointer-events: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 32px;
+}
+
+.list {
+    border-radius: 3px;
+
+    &::part(viewport) {
+        color: #e1dceb;
+    }
+
+    &.horizontal {
+        &::part(viewport) {
+            background: -webkit-linear-gradient(45deg, #504963 0%, #504963 50%, #675a8b 100%);
+            background-color: #504963;
+        }
+    }
+
+    &__container {
+        cursor: pointer;
+        user-select: none;
+        word-break: break-all;
+        height: 100%;
+        width: 100%;
+        padding: 32px;
+        padding-bottom: 64px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.horizontal {
+        max-height: unset;
+        height: 500px;
+        width: 100%;
+    }
+}

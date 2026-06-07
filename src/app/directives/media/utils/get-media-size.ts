@@ -1,4 +1,4 @@
-import { ISize } from "../../../../../projects/ng-virtual-list/src/public-api";
+import { ISize } from 'ng-virtual-list';
 import { IMediaParams } from "../interfaces";
 import { MediaScreenSize } from "../types";
 

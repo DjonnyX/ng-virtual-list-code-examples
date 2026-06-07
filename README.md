@@ -1,6 +1,6 @@
 # NgVirtualList
 
-🚀 High-performance virtual scrolling for Angular apps. Render 100,000+ items in Angular without breaking a sweat. Smooth, customizable, and developer-friendly.
+🚀 High-performance virtual scrolling for Angular apps. Render 10,000+ items in Angular without breaking a sweat. Smooth, customizable, and developer-friendly.
 
 ⚡A powerful API for implementing lists of varying functionality and complexity.
 
@@ -20,16 +20,7 @@
 ![npm downloads](https://img.shields.io/npm/dm/ng-virtual-list)
 ![npm total downloads](https://img.shields.io/npm/dt/ng-virtual-list)
 
-[Chat Demo](https://chat-demo.eugene-grebennikov.pro/)
-[(Code)](https://github.com/DjonnyX/ng-virtual-list-chat-demo)
-
-[News Feed Demo](https://news-feed-demo.eugene-grebennikov.pro/)
-[(Code)](https://github.com/DjonnyX/ng-virtual-list-news-feed-demo)
-
-[Live Examples (Storybook)](https://ng-virtual-list-examples.eugene-grebennikov.pro/)
-
-[Examples](https://ng-virtual-list.eugene-grebennikov.pro/)
-[(Code)](https://github.com/DjonnyX/ng-virtual-list-demo/tree/main/src/app)
+[Documentation](https://ng-virtual-list-x12.eugene-grebennikov.pro/)
 
 <br/>
 
@@ -136,7 +127,7 @@ Template:
 
 <ng-template #horizontalItemRenderer let-data="data" let-config="config">
   @if (data) {
-    <div [ngClass]="{'list__h-container': true, 'selected': config.selected}">
+    <div [ngClass]="{'list__h-container': true, 'selected': api.selected}">
       <span>{{data.name}}</span>
     </div>
   }
@@ -192,7 +183,7 @@ Template:
         </div>
       }
       @default {
-        <div [ngClass]="{'list__h-container': true, 'selected': config.selected}">
+        <div [ngClass]="{'list__h-container': true, 'selected': api.selected}">
           <span>{{data.name}}</span>
         </div>
       }
@@ -621,7 +612,11 @@ Inputs
 | itemSize | number \| 'viewport' = 24 | If direction = 'vertical', then the height of a typical element. If direction = 'horizontal', then the width of a typical element. If the dynamicSize property is true, the items in the list can have different sizes, and you must specify the itemSize property to adjust the sizes of the items in the unallocated area. If the value is 'viewport', the sizes of elements are automatically resized to fit the viewport size. |
 | itemTransform | [ItemTransform](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/types/item-transform.ts) \| null = null | Custom transformation of element's position, rotation, scale, opacity and zIndex. The default value is `null`. |
 | itemRenderer | TemplateRef | Rendering element template. |
-| itemConfigMap | [IVirtualListItemConfigMap?](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/models/item-config-map.model.ts) | Sets `sticky` position and `selectable` for the list item element. If `sticky` position is greater than `0`, then `sticky` position is applied. If the `sticky` value is greater than `0`, then the `sticky` position mode is enabled for the element. `1` - position start, `2` - position end. Default value is `0`. `selectable` determines whether an element can be selected or not. Default value is `true`. |
+| itemConfigMap | [IVirtualListItemConfigMap?](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/models/item-config-map.model.ts) | Sets `sticky` position, `fullSize`, `collapsable` and `selectable` for the list item element. If `sticky` position is greater than `0`, then `sticky` position is applied. 
+   If the `sticky` value is greater than `0`, then the `sticky` position mode is enabled for the element. `1` - position start, `2` - position end. Default value is `0`.
+   `selectable` determines whether an element can be selected or not. Default value is `true`.
+   `collapsable` determines whether an element with a `sticky` property greater than zero can collapse and collapse elements in front that do not have a `sticky` property.
+   `fullSize` determines the size of an element when rendering lists with cell divisions. If sticky is 1 or 2, fullSize automatically becomes true. The default value is false. |
 | langTextDir | [TextDirection? = 'ltr'](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/enums/text-direction.ts) | A string indicating the direction of text for the locale. Can be either "ltr" (left-to-right) or "rtl" (right-to-left). |
 | loading | boolean? = false | If `true`, the scrollBar goes into loading state. The default value is `false`. |
 | maxBufferSize | number? = 10 | Maximum number of elements outside the scope of visibility. Default value is 10. If maxBufferSize is set to be greater than bufferSize, then adaptive buffer mode is enabled. The greater the scroll size, the more elements are allocated for rendering. |
@@ -632,6 +627,7 @@ Inputs
 | motionBlur | number \| 'disabled' = 0.15 | Motion blur effect. The default value is `0.25`. |
 | motionBlurEnabled | boolean = false | Determines whether to apply motion blur or not. The default value is `false`. |
 | overscrollEnabled | boolean? = true | Determines whether the overscroll (re-scroll) feature will work. The default value is "true". |
+| overlappingScrollbar | boolean? = false | Determines whether the scroll bar will overlap the list. The default value is "false". |
 | selectByClick | boolean? = true | If `false`, the element is selected using the config.select method passed to the template; if `true`, the element is selected by clicking on it. The default value is `true`. |
 | stickyEnabled | boolean? = false | Determines whether items with the given `sticky` in `itemConfigMap` will stick to the edges. Default value is "false". |
 | selectedIds | Array<[Id](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/types/id.ts)> \| [Id](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/types/id.ts) \| null | Sets the selected items. |
@@ -643,8 +639,8 @@ Inputs
 | snapToItemAlign | [SnapToItemAlign](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/enums/snap-to-item-align.ts) = [SnapToItemAligns](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/enums/snap-to-item-aligns.ts).CENTER | Alignment for snapToItem. Available values ​​are `start`, `center`, and `end`. The default value is `center`. |
 | snappingDistance | [SnappingDistance](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/types/snapping-distance.ts) = "25%" | Snapping activation distance. Can be specified as a percentage of the element size or in absolute values. The default value is `25%`. |
 | snappingMethod | [SnappingMethod](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/enums/snapping-method.ts) = [SnappingMethods.STANDART](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/enums/snapping-methods.ts) | Snapping method. Default value is [SnappingMethods.STANDART](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/enums/snapping-method.ts). [SnappingMethods.STANDART](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/enums/snapping-method.ts) - Classic group visualization. [SnappingMethods.ADVANCED](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/enums/snapping-method.ts) - A mask is applied to the viewport area so that the background is displayed underneath the attached group. |
-| snapScrollToStart | boolean? = true | Determines whether the scroll will be anchored to the start of the list. Default value is "true". This property takes precedence over the snapScrollToEnd property. That is, if snapScrollToStart and snapScrollToEnd are enabled, the list will initially snap to the beginning; if you move the scroll bar to the end, the list will snap to the end. If snapScrollToStart is disabled and snapScrollToEnd is enabled, the list will snap to the end; if you move the scroll bar to the beginning, the list will snap to the beginning. If both snapScrollToStart and snapScrollToEnd are disabled, the list will never snap to the beginning or end. |
-| snapScrollToEnd | boolean? = true | Determines whether the scroll will be anchored to the утв of the list. Default value is "true". That is, if snapScrollToStart and snapScrollToEnd are enabled, the list will initially snap to the beginning; if you move the scroll bar to the end, the list will snap to the end. If snapScrollToStart is disabled and snapScrollToEnd is enabled, the list will snap to the end; if you move the scroll bar to the beginning, the list will snap to the beginning. If both snapScrollToStart and snapScrollToEnd are disabled, the list will never snap to the beginning or end. |
+| snapScrollToStart | boolean? = true | Determines whether the scroll will be anchored to the start of the list. Default value is "true". This property takes precedence over the snapScrollToEnd property. That is, if snapScrollToStart and snapScrollToEnd are enabled, the list will initially snap to the beginning; if you move the scroll bar to the end, the list will snap to the end. If snapScrollToStart is disabled and snapScrollToEnd is enabled, the list will snap to the end; if you move the scroll bar to the beginning, the list will snap to the beginning. If both snapScrollToStart and snapScrollToEnd are disabled, the list will never snap to the beginning or end. In the `spreadingMode=SpreadingModes.INFINITY` mode, the `snapScrollToStart` property is automatically disabled, since the list has no beginning or end. |
+| snapScrollToEnd | boolean? = true | Determines whether the scroll will be anchored to the утв of the list. Default value is "true". That is, if snapScrollToStart and snapScrollToEnd are enabled, the list will initially snap to the beginning; if you move the scroll bar to the end, the list will snap to the end. If snapScrollToStart is disabled and snapScrollToEnd is enabled, the list will snap to the end; if you move the scroll bar to the beginning, the list will snap to the beginning. If both snapScrollToStart and snapScrollToEnd are disabled, the list will never snap to the beginning or end. In the `spreadingMode=SpreadingModes.INFINITY` mode, the `snapScrollToEnd` property is automatically disabled, since the list has no beginning or end. |
 | snapToEndTransitionInstantOffset | number? = 0 | Sets the offset value; if the scroll area value is exceeded, the scroll animation will be disabled. Default value is "0". |
 | scrollbarEnabled | boolean? = true | Determines whether the scrollbar is shown or not. The default value is "true". |
 | scrollbarInteractive | boolean? = true | Determines whether scrolling using the scrollbar will be possible. The default value is "true". |
@@ -655,7 +651,9 @@ Inputs
 | scrollBehavior | ScrollBehavior? = 'smooth' | Defines the scrolling behavior for any element on the page. The default value is "smooth". |
 | scrollingSettings | [IScrollingSettings](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/interfaces/scrolling-settings.ts) = {frictionalForce: 0.035, mass: 0.005, maxDistance: 100000, maxDuration: 4000, speedScale: 10, optimization: true} | Scrolling settings. |
 | scrollingOneByOne | boolean = false | Specifies whether to scroll one item at a time if true and the scrollToItem property is set. The default value is `false`. |
+| spreadingMode | [SpreadingMode](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/enums/spreading-mode.ts) ='standart' | The order of list elements. Available values ​​are `standard` and `infinity`. `normal` — list elements are ordered according to the collection sequence. `infinity` — list elements are ordered cyclically, forming an infinite list. When set to `infinity`, the `alignment` property is forced to the value `Alignments.CENTER`, the `scrollbarEnabled` property is forced to the `false`. The default value is `standard`. |
 | trackBy | string? = 'id' | The name of the property by which tracking is performed. |
+| zIndexWhenSelecting | string \| null = null | Defines the zIndex when a list item is selected. The default value is `null`. |
 
 <br/>
 
@@ -706,6 +704,31 @@ Properties
 | measures | [IDisplayObjectMeasures](https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/models/display-object-measures.model.ts) \| null | Display object metrics. |
 
 <br/>
+
+### [VirtualClickModule](https://github.com/DjonnyX/ng-virtual-list/blob/18.x/projects/ng-virtual-list/src/lib/directives/item-click/item-click.module.ts)
+
+### Virtual click directive
+
+To correctly handle interactive elements within a list, such as buttons, you need to use the VirtualClick directive.
+
+```ts
+import { NgVirtualListModule, VirtualClickModule } from 'ng-virtual-list';
+
+@Component({
+  selector: 'example',
+  imports: [NgVirtualListModule, VirtualClickModule],
+})
+```
+
+```html
+<ng-template #itemRenderer let-data="data" let-config="config" let-api="api">
+  @if (data) {
+    <div virtualClick (onVirtualClick)="api.select(data.id, true)">
+      <span>{{data.name}}</span>
+    </div>
+  }
+</ng-template>
+```
 
 ## 🤝 Contributing
 

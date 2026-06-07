@@ -30,6 +30,8 @@ export class CustomScrollbarComponent {
 
     readonly height = input<number>(0);
 
+    readonly strokeWidth = input<number>(8);
+
     readonly fillPositions = input<GradientColorPositions>([0, 1]);
 
     readonly params = input<CustomScrollBarTheme>(DEFAULT_SCROLLBAR_THEME);

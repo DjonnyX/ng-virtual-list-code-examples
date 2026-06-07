@@ -40,11 +40,34 @@ a {
     margin-bottom: 24px;
     width: calc(100% - 40px);
     max-width: 640px;
+    color: #8280af;
+
+    .expression {
+        border-radius: 4px;
+        padding: 0px 4px;
+        background-color: rgba(255, 255, 255, .1);
+    }
 
     &.bt {
         margin-bottom: 6px;
     }
 
+    .code {
+        position: relative;
+        background-color: #443b53;
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 0 16px 12px 16px;
+        color: #b1b3b5;
+        font-family: monospace;
+        margin-bottom: 12px;
+
+        .head {
+            padding: 8px 0;
+            color: #897b9f;
+            text-transform: uppercase;
+        }
+    }
     &.cap {
         margin-bottom: 24px;
 

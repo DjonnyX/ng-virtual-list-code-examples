@@ -1,4 +1,4 @@
-import { IVirtualListCollection } from "../../../../../projects/ng-virtual-list/src/public-api";
+import { IVirtualListCollection } from 'ng-virtual-list';
 
 /**
  * @author Evgenii Alexandrovich Grebennikov

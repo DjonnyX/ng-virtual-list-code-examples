@@ -1,0 +1,12 @@
+<div class="table">
+  @let d = data();
+  @if (!!d) {
+    @for (item of d.items; track $index) {
+      <div class="content">
+        <div class="tool">
+          <span class="value">{{item.name}}</span>
+        </div>
+      </div>
+    }
+  }
+</div>

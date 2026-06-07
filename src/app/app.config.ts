@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
       provide: MEDIA_CONFIG, useValue: mediaConfig,
     },
     {
-      provide: VERSION, useValue: '20.12.0-beta-08',
+      provide: VERSION, useValue: '20.12.0-beta-09',
     }
   ]
 };

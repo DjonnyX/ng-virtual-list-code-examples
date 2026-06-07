@@ -1,54 +1,14 @@
 <div class="vl-section">
   <div class="vl-section__container">
-    <a href="https://github.com/djonnyx/ng-virtual-list">ng-virtual-list</a> supports element
-    transformations.<br /><br />
-    The following presets are available:<br />
-    - <a
-      href="https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/transformations/index.ts">ItemTransformations.LINEAR</a><br />
-      - <a
-        href="https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/transformations/index.ts">ItemTransformations.SWIPE_3D</a><br />
-    - <a
-      href="https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/transformations/index.ts">ItemTransformations.EVENT_HORIZON</a><br />
-    - <a
-      href="https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/transformations/index.ts">ItemTransformations.DECK_OF_CARDS</a><br />
-    - <a
-      href="https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/transformations/index.ts">ItemTransformations.DECK_OF_CARDS_3D</a>.<br /><br />
-    You can also create custom transformation sets; see <a
-      href="https://github.com/DjonnyX/ng-virtual-list/blob/20.x/projects/ng-virtual-list/src/lib/transformations/deck-of-cards-3d.ts">implementation
-      example</a>.
-  </div>
-</div>
-
-<div class="vl-section">
-  <div class="vl-section__container">
-    Each default transformation preset has flexible settings, allowing you to achieve various element distribution
-    effects.
-  </div>
-</div>
-
-<div class="vl-section">
-  <div class="vl-section__container">
     <h2>Deck Of Cards 3D</h2>
     <ng-virtual-list #gallery1 class="list carousel-list carousel-list-3d transpanent" [ngClass]="gallery1Classes"
-      direction="horizontal" [items]="horizontalItems" [bufferSize]="3" [maxBufferSize]="3" selectingMode="select"
+      direction="horizontal" [items]="horizontalItems" [bufferSize]="5" [maxBufferSize]="5" selectingMode="select"
       [motionBlurEnabled]="motionBlurEnabled" [motionBlur]="0.005" [maxMotionBlur]="0.05"
       [itemRenderer]="itemRendererGallery" [dynamicSize]="false" [itemSize]="120" (onItemClick)="onItemClick($event)"
       (onSelect)="onSelectHandler($event)" [selectedIds]="2" [selectByClick]="true" [snapToItem]="true" alignment="center"
       snapToItemAlign="center" [itemTransform]="deckOfCards3D" [scrollbarEnabled]="false" [scrollbarThickness]="6"
       (onScrollReachStart)="onScrollReachStartHandler()" (onScrollReachEnd)="onScrollReachEndHandler()"
       (onSnapItem)="onSnapItemHandler()"></ng-virtual-list>
-  </div>
-</div>
-
-<div class="vl-section">
-  <div class="vl-section__container">
-    Important! Styles for elements when applying visual effects such as <span class="expression">DOF ​​(Depth Of
-      Field)</span> and <span class="expression">Fog</span> must be specified for <span
-      class="expression">item-fx</span>.
-  </div>
-  <div class="code">
-    <div class="head">scss</div>
-    <div [innerHtml]="stylesExample"></div>
   </div>
 </div>
 
@@ -61,20 +21,14 @@
     </div>
     <br />
     <ng-virtual-list #gallery2 class="list carousel-list carousel-list-3d transpanent" [ngClass]="gallery2Classes"
-      direction="horizontal" [items]="dynamicItems" [bufferSize]="1" [maxBufferSize]="1" selectingMode="select"
-      [itemRenderer]="itemRendererGallery" [dynamicSize]="true" [minItemSize]="60" [maxItemSize]="200" alignment="center"
+      direction="horizontal" [items]="dynamicItems" [bufferSize]="5" [maxBufferSize]="5" selectingMode="select"
+      [itemRenderer]="itemRendererGallery" [dynamicSize]="true" [minItemSize]="60" [itemSize]="60" [maxItemSize]="200" alignment="center"
       (onItemClick)="onItemClick($event)" [stickyEnabled]="true" (onSelect)="onSelectHandler($event)" [selectedIds]="2"
       [motionBlurEnabled]="motionBlurEnabled" [motionBlur]="0.005" [maxMotionBlur]="0.05"
       [selectByClick]="true" [snapToItem]="true" [itemTransform]="deckOfCards3DDynamic"
       snapToItemAlign="center" [scrollbarEnabled]="false" [scrollbarThickness]="6"
       (onScrollReachStart)="onScrollReachStartHandler()" (onScrollReachEnd)="onScrollReachEndHandler()"
       (onSnapItem)="onSnapItemHandler()"></ng-virtual-list>
-  </div>
-</div>
-
-<div class="vl-section">
-  <div class="vl-section__container">
-    To get the correct scroll constraint range with a given <span class="expression">itemTransform</span> property, you must set the <span class="expression">alignment</span> property to <span class="expression">center</span>.
   </div>
 </div>
 
@@ -88,14 +42,6 @@
       [snapToItem]="true" snapToItemAlign="center" [itemTransform]="deckOfCards" [scrollbarEnabled]="false"
       [scrollbarThickness]="6" (onScrollReachStart)="onScrollReachStartHandler()"
       (onScrollReachEnd)="onScrollReachEndHandler()" (onSnapItem)="onSnapItemHandler()"></ng-virtual-list>
-  </div>
-</div>
-
-<div class="vl-section">
-  <div class="vl-section__container">
-    To apply sounds, vibrations, or other signals when items are scrolled, use the <span
-      class="expression">onSnapItem</span> event, which returns the
-    <span class="expression">ID</span> of the new item.
   </div>
 </div>
 

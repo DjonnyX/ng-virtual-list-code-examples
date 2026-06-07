@@ -1,4 +1,4 @@
-import { Id } from "../../../../../projects/ng-virtual-list/src/public-api";
+import { Id } from 'ng-virtual-list';
 
 export interface INavItem {
     id: Id;

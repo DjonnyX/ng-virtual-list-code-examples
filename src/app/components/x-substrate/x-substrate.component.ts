@@ -1,7 +1,7 @@
 import { Component, DestroyRef, effect, ElementRef, inject, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { delay, filter, map, switchMap, tap } from 'rxjs';
-import { GradientColorPositions } from '../../../../projects/ng-virtual-list/src/lib/types/gradient-color-positions';
+import { GradientColorPositions } from 'ng-virtual-list';
 import { getShapeMinSize } from '../utils/get-shape-min-size';
 import { RoundedCorner, GradientColor, Color } from '../interfaces';
 import { SubstarateMode } from './types/substrate-mode';

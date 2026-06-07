@@ -1,0 +1,19 @@
+<div class="desktop">
+  <div class="desktop__container">
+    <ng-virtual-list #list class="list" [items]="tables" direction="horizontal" [itemRenderer]="tableRenderer" [motionBlurEnabled]="true"
+      [bufferSize]="2" [maxBufferSize]="2" itemSize="viewport" [dynamicSize]="false" [snapToItem]="true"
+      [scrollbarEnabled]="false" [scrollingSettings]="scrollingSettings" [scrollingOneByOne]="true"
+      (onSnapItem)="onSnapHandler($event)"></ng-virtual-list>
+    <div class="pagginator-container">
+      <paginator [page]="page" [total]="tables.length"></paginator>
+    </div>
+  </div>
+</div>
+
+<ng-template #tableRenderer let-data="data" let-config="config" let-api="api">
+  @if (data) {
+    <div [ngClass]="{'list__container': true, 'even': config.even, 'selected': config.selected}">
+      <table-demo [id]="data.id" />
+    </div>
+  }
+</ng-template>

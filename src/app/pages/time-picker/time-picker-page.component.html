@@ -1,0 +1,42 @@
+<div class="vl-section">
+  <div class="vl-section__container">
+    <h2>Timepicker</h2>
+    <p class="time-string">{{dateTime | date:'h:mm a'}}</p>
+    <div class="time">
+      <ng-virtual-list #listHours class="list" [items]="hoursItems" selectingMode="select" [clickDistance]="0"
+        [itemRenderer]="hoursRenderer" [bufferSize]="5" [maxBufferSize]="5" [itemSize]="70" [dynamicSize]="false"
+        spreadingMode="infinity" [snapToItem]="true" [selectByClick]="false" [selectedIds]="listHoursSelectedIds"
+        [itemTransform]="time3D" [scrollingSettings]="scrollingSettings" snappingDistance="5%" zIndexWhenSelecting="1000"
+        (onSnapItem)="onSnapItemHoursHandler($event)"></ng-virtual-list>
+      <ng-virtual-list #listMinutes class="list" [items]="minutesItems" selectingMode="select" [clickDistance]="0"
+        [itemRenderer]="minutesRenderer" [bufferSize]="5" [maxBufferSize]="5" [itemSize]="70" [dynamicSize]="false"
+        spreadingMode="infinity" [snapToItem]="true" [selectByClick]="false" [selectedIds]="listMinutesSelectedIds"
+        [itemTransform]="time3D" [scrollingSettings]="scrollingSettings" snappingDistance="5%" zIndexWhenSelecting="1000"
+        (onSnapItem)="onSnapItemMinutesHandler($event)"></ng-virtual-list>
+    </div>
+  </div>
+</div>
+
+<ng-template #hoursRenderer let-data="data" let-config="config" let-api="api">
+  @if (data) {
+    <div virtualClick [maxClickDistance]="0" [ngClass]="{'list__container': true, 'even': config.even, 'selected': config.selected}"
+      (onVirtualClick)="api.select(data.id, true); onClickHoursHandler(data.id)">
+      <span>{{data.name}}</span>
+    </div>
+  }
+</ng-template>
+
+<ng-template #minutesRenderer let-data="data" let-config="config" let-api="api">
+  @if (data) {
+    <div virtualClick [maxClickDistance]="0" [ngClass]="{'list__container': true, 'even': config.even, 'selected': config.selected}"
+      (onVirtualClick)="api.select(data.id, true); onClickMinutesHandler(data.id)">
+      <span>{{data.name}}</span>
+    </div>
+  }
+</ng-template>
+
+<div class="invisible">
+  <audio #audioSnap [controls]="false" [autoplay]="false">
+    <source src="snap.mp3" type="audio/ogg">
+  </audio>
+</div>

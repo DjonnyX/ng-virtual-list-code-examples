@@ -5,7 +5,7 @@ import { fromEvent, tap } from 'rxjs';
 import { StaticClickDirective } from '../../../directives';
 import { ITheme, ThemeService } from '../../../theming';
 import { Color } from '../../../types';
-import { NgVirtualListService, IDisplayObjectConfig, IVirtualListItem } from '../../../../../projects/ng-virtual-list/src/public-api';
+import { NgVirtualListService, IDisplayObjectConfig, IVirtualListItem } from 'ng-virtual-list';
 import { INavItem } from '../interfaces';
 import { Router, RouterModule } from '@angular/router';
 

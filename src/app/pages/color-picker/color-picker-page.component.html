@@ -1,0 +1,40 @@
+<div class="vl-section">
+  <div class="vl-section__container">
+    <h2>Colorpicker</h2>
+    <div class="color-wrapper">
+      @let c = color();
+      <div class="color" [style.backgroundColor]="c">
+        <span>{{c}}</span>
+      </div>
+    </div>
+    <div class="time">
+      <ng-virtual-list #listRed class="list" [items]="redItems" selectingMode="select" [snapScrollToStart]="false"
+        [snapScrollToEnd]="true" [itemRenderer]="itemRenderer" [bufferSize]="1" [maxBufferSize]="1" [itemSize]="100"
+        [dynamicSize]="false" [scrollingSettings]="scrollingSettings" [scrollbarThickness]="80"
+        [overlappingScrollbar]="true" [scrollbarThumbRenderer]="customScrollBarThumb" [scrollbarMinSize]="80"
+        [scrollbarThumbParams]="customScrollBarRedThumbParams" (onScroll)="onScrollRed($event)"></ng-virtual-list>
+      <ng-virtual-list #listGreen class="list" [items]="greenItems" selectingMode="select" [snapScrollToStart]="false"
+        [snapScrollToEnd]="true" [itemRenderer]="itemRenderer" [bufferSize]="1" [maxBufferSize]="1" [itemSize]="100"
+        [dynamicSize]="false" [scrollingSettings]="scrollingSettings" [scrollbarThickness]="80"
+        [overlappingScrollbar]="true" [scrollbarThumbRenderer]="customScrollBarThumb" [scrollbarMinSize]="80"
+        [scrollbarThumbParams]="customScrollBarGreenThumbParams" (onScroll)="onScrollGreen($event)"></ng-virtual-list>
+      <ng-virtual-list #listBlue class="list" [items]="blueItems" selectingMode="select" [snapScrollToStart]="false"
+        [snapScrollToEnd]="true" [itemRenderer]="itemRenderer" [bufferSize]="1" [maxBufferSize]="1" [itemSize]="100"
+        [dynamicSize]="false" [scrollingSettings]="scrollingSettings" [scrollbarThickness]="80"
+        [overlappingScrollbar]="true" [scrollbarThumbRenderer]="customScrollBarThumb" [scrollbarMinSize]="80"
+        [scrollbarThumbParams]="customScrollBarBlueThumbParams" (onScroll)="onScrollBlue($event)"></ng-virtual-list>
+    </div>
+  </div>
+</div>
+
+<ng-template #itemRenderer let-data="data" let-config="config" let-api="api">
+  @if (data) {
+    <div [style]="{background:data.color, height: '100%'}"></div>
+  }
+</ng-template>
+
+<ng-template #customScrollBarThumb let-api="api" let-width="width" let-height="height" let-fillPositions="fillPositions"
+  let-params="params">
+  <custom-scrollbar [loading]="true" [strokeWidth]="2" [api]="api" [width]="width" [height]="height"
+    [fillPositions]="fillPositions" [params]="params"></custom-scrollbar>
+</ng-template>

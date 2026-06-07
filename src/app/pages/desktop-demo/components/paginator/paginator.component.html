@@ -1,0 +1,7 @@
+<div class="pagginator">
+  @for (item of items(); track $index) {
+    <div class="content">
+      <div class="item" [ngClass]="{active: item.active}"></div>
+    </div>
+  }
+</div>
