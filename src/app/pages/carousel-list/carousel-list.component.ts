@@ -9,7 +9,7 @@ import { GradientColor, RoundedCorner } from '../../components/interfaces';
 import { CustomScrollBarTheme } from '../../components/custom-scrollbar/interfaces/custom-scrollbar-theme';
 import { CustomScrollbarModule } from '../../components/custom-scrollbar/custom-scrollbar.module';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { delay, filter, switchMap, tap } from 'rxjs';
+import { filter, switchMap, tap } from 'rxjs';
 
 const X_LITE_BLUE_PLASMA_GRADIENT: GradientColor = ["rgba(133, 142, 255, 0)", "rgb(0, 133, 160)"],
   ROUND_CORNER: RoundedCorner = [3, 3, 3, 3],
@@ -159,12 +159,11 @@ export class CarouselListPageComponent {
       takeUntilDestroyed(),
       filter(v => !!v),
       switchMap(v => {
-        return v.$show.pipe(
+        return v.$initialized.pipe(
           takeUntilDestroyed(this._destroyRef),
           filter(v => !!v),
-          delay(100),
           tap(g => {
-            v.scrollTo(10);
+            v.scrollTo(50);
             this.gallery1Classes = { visible: true };
           }),
         );
@@ -175,12 +174,11 @@ export class CarouselListPageComponent {
       takeUntilDestroyed(),
       filter(v => !!v),
       switchMap(v => {
-        return v.$show.pipe(
+        return v.$initialized.pipe(
           takeUntilDestroyed(this._destroyRef),
           filter(v => !!v),
-          delay(100),
           tap(g => {
-            v.scrollTo(10);
+            v.scrollTo(50);
             this.gallery2Classes = { visible: true };
           }),
         );
@@ -191,12 +189,11 @@ export class CarouselListPageComponent {
       takeUntilDestroyed(),
       filter(v => !!v),
       switchMap(v => {
-        return v.$show.pipe(
+        return v.$initialized.pipe(
           takeUntilDestroyed(this._destroyRef),
           filter(v => !!v),
-          delay(500),
           tap(g => {
-            v.scrollTo(10);
+            v.scrollTo(50);
             this.gallery3Classes = { visible: true };
           }),
         );
@@ -207,12 +204,11 @@ export class CarouselListPageComponent {
       takeUntilDestroyed(),
       filter(v => !!v),
       switchMap(v => {
-        return v.$show.pipe(
+        return v.$initialized.pipe(
           takeUntilDestroyed(this._destroyRef),
           filter(v => !!v),
-          delay(100),
           tap(g => {
-            v.scrollTo(10);
+            v.scrollTo(50);
             this.gallery4Classes = { visible: true };
           }),
         );
@@ -223,12 +219,11 @@ export class CarouselListPageComponent {
       takeUntilDestroyed(),
       filter(v => !!v),
       switchMap(v => {
-        return v.$show.pipe(
+        return v.$initialized.pipe(
           takeUntilDestroyed(this._destroyRef),
           filter(v => !!v),
-          delay(100),
           tap(g => {
-            v.scrollTo(10);
+            v.scrollTo(50);
             this.gallery5Classes = { visible: true };
           }),
         );
