@@ -4,7 +4,7 @@
     <div class="scroll-to__controls">
       <input type="number" class="scroll-to__input" [(ngModel)]="itemsLength" [required]="true" [min]="0"
         [max]="100000">
-      <button class="scroll-to__button" (click)="onButtonChangeItemsLengthHandler()">setup</button>
+      <button virtualClick class="scroll-to__button" (onVirtualClick)="onButtonChangeItemsLengthHandler()">setup</button>
     </div>
     <ng-virtual-list class="list list-divided" [items]="items1" selectingMode="multi-select"
       [itemRenderer]="itemRenderer" [bufferSize]="1" [maxBufferSize]="1" [dynamicSize]="false" [itemSize]="80"
@@ -22,7 +22,7 @@
     <div class="scroll-to__controls">
       <input type="number" class="scroll-to__input" [(ngModel)]="dl2ItemId" [required]="true" [min]="minDl2Id"
         [max]="maxDl2Id">
-      <button class="scroll-to__button" (click)="onButtonScrollDL2ToIdClickHandler($event)">Scroll</button>
+      <button virtualClick class="scroll-to__button" (onVirtualClick)="onButtonScrollDL2ToIdClickHandler($event)">Scroll</button>
     </div>
     <ng-virtual-list #dl2List class="list list-divided" [items]="items2" selectingMode="multi-select"
       [itemRenderer]="itemRenderer" [bufferSize]="2" [maxBufferSize]="2" [minItemSize]="26" [dynamicSize]="true" 
@@ -43,7 +43,7 @@
     <div class="scroll-to__controls">
       <input type="number" class="scroll-to__input" [(ngModel)]="dl3ItemId" [required]="true" [min]="minDl3Id"
         [max]="maxDl3Id">
-      <button class="scroll-to__button" (click)="onButtonScrollDL3ToIdClickHandler($event)">Scroll</button>
+      <button virtualClick class="scroll-to__button" (onVirtualClick)="onButtonScrollDL3ToIdClickHandler($event)">Scroll</button>
     </div>
     <ng-virtual-list #dl3List class="list list-divided" [items]="groupDynamicItemsWithSnap" [minItemSize]="26"
       selectingMode="multi-select" [itemConfigMap]="groupDynamicItemsStickyMapWithSnap" [stickyEnabled]="true"

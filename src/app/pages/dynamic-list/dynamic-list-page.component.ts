@@ -3,10 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { delay, interval, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  NgVirtualListModule, NgVirtualListComponent, IVirtualListCollection, IVirtualListItemConfigMap, IRenderVirtualListItem, ISize, Id,
-  IScrollingSettings,
-} from 'ng-virtual-list';
+import { NgVirtualListModule, NgVirtualListComponent, IVirtualListCollection, IVirtualListItemConfigMap, IRenderVirtualListItem, ISize, Id, IScrollingSettings, VirtualClickModule } from 'ng-virtual-list';
 import { GradientColor, RoundedCorner } from '../../components/interfaces';
 import { CustomScrollBarTheme } from '../../components/custom-scrollbar/interfaces/custom-scrollbar-theme';
 import { CustomScrollbarModule } from '../../components/custom-scrollbar/custom-scrollbar.module';
@@ -94,7 +91,7 @@ const generateDynamicItems = (len: number, startWith: number = 0) => {
 
 @Component({
   selector: 'dynamic-list-page',
-  imports: [CommonModule, FormsModule, NgVirtualListModule, CustomScrollbarModule],
+  imports: [CommonModule, FormsModule, NgVirtualListModule, CustomScrollbarModule, VirtualClickModule],
   templateUrl: './dynamic-list-page.component.html',
   styleUrl: './dynamic-list-page.component.scss'
 })

@@ -4,7 +4,7 @@
     <div class="scroll-to__controls">
       <input type="number" class="scroll-to__input" [(ngModel)]="dlItemId" [required]="true" [min]="minDlId"
         [max]="maxDlId">
-      <button class="scroll-to__button" (click)="onButtonScrollDLToIdClickHandler($event)">Scroll</button>
+      <button virtualClick class="scroll-to__button" (onVirtualClick)="onButtonScrollDLToIdClickHandler($event)">Scroll</button>
     </div>
     <ng-virtual-list #dynamicList class="list" [items]="groupDynamicItems" [itemRenderer]="groupItemRenderer"
       [bufferSize]="3" [maxBufferSize]="3" [itemConfigMap]="groupDynamicItemsStickyMap" [stickyEnabled]="true"
@@ -21,7 +21,7 @@
     <div class="scroll-to__controls">
       <input type="number" class="scroll-to__input" [(ngModel)]="dynamicItemsLength" [required]="true" [min]="0"
         [max]="100000">
-        <button class="scroll-to__button" (click)="onButtonChangeDynamicItemsLengthHandler()">setup</button>
+        <button virtualClick class="scroll-to__button" (onVirtualClick)="onButtonChangeDynamicItemsLengthHandler()">setup</button>
     </div>
     <ng-virtual-list #dynamicItemsList class="list" [items]="dynamicItems" selectingMode="multi-select" [itemRenderer]="itemRenderer" [bufferSize]="2" [maxBufferSize]="2"
       [itemSize]="40" (onItemClick)="onItemClick($event)" (onSelect)="onSelectHandler($event)" [selectedIds]="[3,2]"

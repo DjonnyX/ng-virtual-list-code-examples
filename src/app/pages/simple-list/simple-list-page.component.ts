@@ -1,10 +1,7 @@
 import { Component, inject, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  NgVirtualListModule, NgVirtualListComponent, IVirtualListCollection, IVirtualListItemConfigMap, IRenderVirtualListItem, ISize, Id,
-  IScrollingSettings,
-} from 'ng-virtual-list';
+import { NgVirtualListModule, NgVirtualListComponent, IVirtualListCollection, IVirtualListItemConfigMap, IRenderVirtualListItem, ISize, Id, IScrollingSettings, VirtualClickModule } from 'ng-virtual-list';
 import { GradientColor, RoundedCorner } from '../../components/interfaces';
 import { CustomScrollBarTheme } from '../../components/custom-scrollbar/interfaces/custom-scrollbar-theme';
 import { CustomScrollbarModule } from '../../components/custom-scrollbar/custom-scrollbar.module';
@@ -79,7 +76,7 @@ const generateItems = (len: number) => {
 
 @Component({
   selector: 'simple-list-page',
-  imports: [CommonModule, FormsModule, NgVirtualListModule, CustomScrollbarModule],
+  imports: [CommonModule, FormsModule, NgVirtualListModule, CustomScrollbarModule, VirtualClickModule],
   templateUrl: './simple-list-page.component.html',
   styleUrl: './simple-list-page.component.scss'
 })

@@ -6,7 +6,7 @@ import { Color, GradientColor, GradientColorPositions, RoundedCorner } from '../
 import { ButtonPresets, ThemeService, ITheme } from '../../theming';
 import { PressDirective } from '../../directives';
 import { SubstarateMode, SubstarateStyle, SubstarateModes, SubstarateStyles } from '../x-substrate';
-import { ISize } from 'ng-virtual-list';
+import { ISize, VirtualClickModule } from 'ng-virtual-list';
 import { formatCSSNumber } from '../utils';
 import { XSubstrateModule } from '../x-substrate/x-substrate.module';
 
@@ -31,7 +31,8 @@ const DEFAULT_ROUND_CORNER: RoundedCorner = [8, 8, 8, 8],
     CommonModule,
     XSubstrateModule,
     PressDirective,
-  ],
+    VirtualClickModule,
+],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
 })

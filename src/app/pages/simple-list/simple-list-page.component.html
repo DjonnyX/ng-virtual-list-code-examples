@@ -25,7 +25,7 @@
     <div class="scroll-to__controls">
       <input type="number" class="scroll-to__input" [(ngModel)]="itemsLength" [required]="true" [min]="0"
         [max]="100000">
-      <button class="scroll-to__button" (click)="onButtonChangeItemsLengthHandler()">setup</button>
+      <button virtualClick class="scroll-to__button" (onVirtualClick)="onButtonChangeItemsLengthHandler()">setup</button>
     </div>
     <ng-virtual-list class="list" [items]="items1" selectingMode="multi-select" [itemRenderer]="itemRenderer"
       [bufferSize]="1" [maxBufferSize]="5" [dynamicSize]="false" [itemSize]="40" (onItemClick)="onItemClick($event)"
@@ -62,7 +62,7 @@
     <h2>Scroll to item</h2>
     <div class="scroll-to__controls">
       <input type="number" class="scroll-to__input" [(ngModel)]="itemId" [required]="true" [min]="minId" [max]="maxId">
-      <button class="scroll-to__button" (click)="onButtonScrollToIdClickHandler($event)">Scroll</button>
+      <button virtualClick class="scroll-to__button" (onVirtualClick)="onButtonScrollToIdClickHandler($event)">Scroll</button>
     </div>
     <ng-virtual-list #virtualList class="list" [items]="items" [itemRenderer]="itemRenderer" [bufferSize]="5"
       [scrollbarThumbRenderer]="customScrollBarThumb" [scrollbarThumbParams]="customScrollBarThumbParams"
